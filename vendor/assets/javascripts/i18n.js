@@ -48,6 +48,25 @@ var I18n = I18n || {};
 // Set default locale to english
 I18n.defaultLocale = "en";
 
+I18n.translations = {};
+
+(function () {
+  var merge = function (dest, obj) {
+    var key, value;
+    for (key in obj) if (obj.hasOwnProperty(key)) {
+      value = obj[key];
+      if (Object.prototype.toString.call(value) === '[object String]') {
+        dest[key] = value;
+      } else {
+        if (dest[key] == null) dest[key] = {};
+        merge(dest[key], value);
+      }
+    }
+  };
+
+  I18n.addTranslations = function (obj) { merge(I18n.translations, obj); };
+})();
+
 // Set default handling of translation fallbacks to false
 I18n.fallbacks = false;
 
