@@ -1,5 +1,10 @@
 // Instantiate the object
 var I18n = I18n || {};
+if ((typeof window) !== "undefined") {
+  window.I18n = I18n;
+} else if ((typeof global) !== "undefined") {
+  global.I18n = I18n;
+}
 
 // Set default locale to english
 I18n.defaultLocale = "en";
